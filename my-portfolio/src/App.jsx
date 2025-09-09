@@ -1,9 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { saveAs } from 'file-saver'
+import { 
+  Github, Twitter, Linkedin, Instagram, Mail, 
+  Sun, Moon, ExternalLink, Code, Palette,
+  Server, Database, Cpu, Zap, ChevronDown,
+  Download, Award, Calendar, FileText, BookOpen,
+  GraduationCap, MapPin, Briefcase
+} from 'lucide-react'
 import './App.css'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const [isLoading, setIsLoading] = useState(true)
+  const canvasRef = useRef(null)
 
   useEffect(() => {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -20,7 +30,19 @@ function App() {
     }
 
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    
+    // Initialize 3D background
+    init3DBackground()
+    
+    // Simulate loading
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 2000)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      clearTimeout(timer)
+    }
   }, [])
 
   useEffect(() => {
@@ -31,54 +53,182 @@ function App() {
     }
   }, [isDarkMode])
 
+  const init3DBackground = () => {
+    // This would be replaced with actual Three.js code in a real implementation
+    // For now, we'll use a CSS-based 3D effect
+    console.log("3D background initialized")
+  }
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId)
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const downloadCV = () => {
+    const blob = new Blob([`Dasith Kavishalya - Frontend Developer
+
+Professional Summary:
+Experienced Frontend Developer with 5+ years of expertise in React, JavaScript, and modern web technologies. Passionate about creating beautiful, responsive, and user-friendly web applications.
+
+Education:
+BSc (Hons) in Software Engineering - University of Westminster (2018-2022)
+Diploma in Web Development - IDM Campus (2016-2018)
+
+Skills:
+- React, JavaScript, TypeScript
+- HTML5, CSS3, Tailwind CSS
+- Next.js, Node.js, Express
+- Git, GitHub, CI/CD
+- UI/UX Design, Responsive Design
+- Three.js, WebGL, 3D Graphics
+
+Experience:
+Senior Frontend Developer at TechCorp (2020-Present)
+Frontend Developer at WebSolutions (2018-2020)
+
+Certifications:
+- AWS Certified Developer Associate
+- Google Professional Frontend Developer
+- React Advanced Certification
+- Three.js Journey Certification
+
+Projects:
+E-Commerce Platform - Full-featured online store
+Task Management App - Productivity application
+Weather Dashboard - Real-time weather application
+
+Contact:
+Email: dasith@example.com
+Phone: +1 (555) 123-4567
+Website: www.dasithdev.com`], { type: 'text/plain;charset=utf-8' })
+    
+    saveAs(blob, 'Dasith_Kavishalya_CV.pdf')
+  }
+
+  // Loading screen component
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900 z-50">
+        <div className="animate-pulse flex flex-col items-center">
+          <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mb-4 animate-bounce"></div>
+          <h2 className="text-xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Loading Portfolio...
+          </h2>
+        </div>
+      </div>
+    )
+  }
+
+  // 3D Animated Background Component
+  const ThreeDBackground = () => (
+    <div className="fixed inset-0 z-0 overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-full">
+        {/* Animated 3D shapes */}
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500 dark:bg-blue-600 rounded-full opacity-10 animate-float-3d" style={{ animationDelay: '0s' }}></div>
+        <div className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-purple-500 dark:bg-purple-600 rounded-full opacity-10 animate-float-3d-reverse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-green-500 dark:bg-green-600 rounded-lg opacity-10 animate-float-3d" style={{ animationDelay: '2s', transform: 'rotate(45deg)' }}></div>
+        <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-yellow-500 dark:bg-yellow-600 opacity-10 animate-float-3d-reverse" style={{ animationDelay: '1.5s', transform: 'rotate(30deg)' }}></div>
+        
+        {/* Animated grid for 3D effect */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-5 animate-pan"></div>
+      </div>
+    </div>
+  )
+
   // Navigation component
   const Navigation = () => (
-    <nav className="fixed w-full z-10 backdrop-blur-sm bg-white/70 dark:bg-gray-900/70 border-b border-gray-200 dark:border-gray-800">
+    <nav className="fixed w-full z-30 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-gray-200/50 dark:border-gray-800/50 transition-all duration-300">
       <div className="container mx-auto px-6 py-3 flex justify-between items-center">
-        <a href="#" className="text-xl font-bold">John Doe</a>
+        <a href="#" className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          Dasith Kavishalya
+        </a>
         
         <div className="hidden md:flex space-x-8">
-          {['home', 'about', 'projects', 'skills', 'contact'].map((item) => (
-            <a 
+          {['home', 'about', 'education', 'skills', 'projects', 'certifications', 'contact'].map((item) => (
+            <button
               key={item}
-              href={`#${item}`}
-              className={`capitalize transition-colors ${activeSection === item ? 'text-blue-600 dark:text-blue-400 font-medium' : 'hover:text-blue-600 dark:hover:text-blue-400'}`}
+              onClick={() => scrollToSection(item)}
+              className={`capitalize transition-all duration-300 ${activeSection === item 
+                ? 'text-blue-600 dark:text-blue-400 font-medium scale-105' 
+                : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-105'}`}
             >
               {item}
-            </a>
+            </button>
           ))}
         </div>
         
-        <button 
-          onClick={() => setIsDarkMode(!isDarkMode)}
-          className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-          aria-label="Toggle dark mode"
-        >
-          {isDarkMode ? '☀️' : '🌙'}
-        </button>
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={downloadCV}
+            className="hidden md:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            <Download size={16} />
+            Download CV
+          </button>
+          
+          <button 
+            onClick={() => setIsDarkMode(!isDarkMode)}
+            className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 transform hover:scale-110"
+            aria-label="Toggle dark mode"
+          >
+            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+        </div>
       </div>
     </nav>
   )
 
   // Hero section component
   const HeroSection = () => (
-    <section id="home" className="min-h-screen flex items-center pt-16">
-      <div className="container mx-auto px-6 py-20 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            Hi, I'm <span className="text-blue-600 dark:text-blue-400">John Doe</span>
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 opacity-80">
-            A Frontend Developer specializing in React and modern web technologies
-          </p>
-          <div className="flex justify-center space-x-4">
-            <a href="#projects" className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-              View My Work
-            </a>
-            <a href="#contact" className="px-6 py-3 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-              Contact Me
-            </a>
+    <section id="home" className="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
+      <ThreeDBackground />
+      
+      <div className="container mx-auto px-6 py-20 text-center relative z-10">
+        <div className="max-w-3xl mx-auto transform transition-all duration-700 hover:scale-105">
+          <div className="mb-8 animate-float">
+            <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1 shadow-2xl transform-style-3d">
+              <img 
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" 
+                alt="Dasith Kavishalya" 
+                className="w-full h-full object-cover rounded-full border-4 border-white dark:border-gray-900"
+              />
+            </div>
           </div>
+          
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up">
+            Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Dasith Kavishalya</span>
+          </h1>
+          <p className="text-xl md:text-2xl mb-8 opacity-80 animate-fade-in-up delay-100">
+            A <span className="font-semibold">Frontend Developer</span> & <span className="font-semibold">3D Enthusiast</span>
+          </p>
+          <div className="flex justify-center space-x-4 animate-fade-in-up delay-200">
+            <button 
+              onClick={() => scrollToSection('projects')}
+              className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2"
+            >
+              <Code size={18} />
+              View My Work
+            </button>
+            <button 
+              onClick={downloadCV}
+              className="px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 shadow-lg hover:shadow-xl"
+            >
+              <FileText size={18} />
+              Download CV
+            </button>
+          </div>
+        </div>
+        
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <button 
+            onClick={() => scrollToSection('about')}
+            className="p-2 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all transform-style-3d"
+            aria-label="Scroll down"
+          >
+            <ChevronDown size={24} />
+          </button>
         </div>
       </div>
     </section>
@@ -86,66 +236,110 @@ function App() {
 
   // About section component
   const AboutSection = () => (
-    <section id="about" className="py-20">
+    <section id="about" className="py-20 relative">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">About Me</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">About Me</span>
+        </h2>
         <div className="flex flex-col md:flex-row items-center gap-12">
-          <div className="w-full md:w-1/3">
-            <div className="rounded-2xl overflow-hidden shadow-xl">
+          <div className="w-full md:w-1/3 animate-fade-in-left transform-style-3d">
+            <div className="rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-105 hover:rotate-3d">
               <img 
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" 
-                alt="Profile" 
+                alt="Dasith Kavishalya" 
                 className="w-full h-auto object-cover"
               />
             </div>
           </div>
-          <div className="w-full md:w-2/3">
-            <p className="text-lg mb-6">
-              I'm a passionate frontend developer with 5 years of experience creating beautiful, functional websites and applications. 
-              I specialize in React, Vue.js, and modern JavaScript frameworks.
+          <div className="w-full md:w-2/3 animate-fade-in-right">
+            <p className="text-lg mb-6 leading-relaxed">
+              I'm a passionate <span className="font-semibold text-blue-600 dark:text-blue-400">frontend developer</span> with 5+ years of experience creating beautiful, functional websites and applications. 
+              I specialize in React, Vue.js, and modern JavaScript frameworks, with a keen eye for UI/UX design.
             </p>
-            <p className="text-lg mb-6">
-              My approach combines aesthetic design with technical excellence to create digital experiences that users love. 
-              I'm constantly learning and adapting to new technologies and methodologies.
+            <p className="text-lg mb-6 leading-relaxed">
+              My approach combines <span className="font-semibold text-purple-600 dark:text-purple-400">aesthetic design</span> with technical excellence to create digital experiences that users love. 
+              I'm constantly learning and adapting to new technologies and methodologies to stay at the forefront of web development.
             </p>
-            <div className="flex flex-wrap gap-4">
-              {['React', 'JavaScript', 'TypeScript', 'CSS/Tailwind', 'UI/UX Design'].map((skill) => (
-                <div key={skill} className="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full">
-                  {skill}
+            <div className="flex flex-wrap gap-3 mb-6">
+              {['React', 'JavaScript', 'TypeScript', 'Next.js', 'Tailwind CSS', 'UI/UX Design', 'Node.js', 'GraphQL', 'Three.js', 'WebGL'].map((skill) => (
+                <div key={skill} className="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center gap-2 transition-all hover:scale-105 transform-style-3d">
+                  <Zap size={14} className="text-blue-600 dark:text-blue-400" />
+                  <span>{skill}</span>
                 </div>
               ))}
             </div>
+            <button 
+              onClick={downloadCV}
+              className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2"
+            >
+              <Download size={18} />
+              Download My CV
+            </button>
           </div>
         </div>
       </div>
     </section>
   )
 
-  // Projects section component
-  const ProjectsSection = () => (
-    <section id="projects" className="py-20 bg-gray-100 dark:bg-gray-800">
+  // Education section component
+  const EducationSection = () => (
+    <section id="education" className="py-20 bg-gray-50 dark:bg-gray-900 relative">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">My Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[1, 2, 3, 4, 5, 6].map((item) => (
-            <div key={item} className="rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-gray-900 transition-transform hover:scale-105">
-              <img 
-                src={`https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80`} 
-                alt="Project" 
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">Project {item}</h3>
-                <p className="mb-4 opacity-80">A brief description of the project and the technologies used.</p>
-                <div className="flex justify-between items-center">
-                  <a href="#" className="text-blue-600 dark:text-blue-400 hover:underline">View Project</a>
-                  <a href="#" className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
-                    <span className="text-lg font-semibold">GitHub</span>
-                  </a>
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Education</span>
+        </h2>
+        <div className="max-w-4xl mx-auto">
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-200 dark:bg-blue-900/50"></div>
+            
+            {/* Timeline items */}
+            {[
+              {
+                id: 1,
+                degree: "BSc (Hons) in Software Engineering",
+                institution: "University of Westminster",
+                period: "2018 - 2022",
+                location: "London, UK",
+                description: "Specialized in web development, software architecture, and user experience design. Graduated with First Class Honors.",
+                icon: <GraduationCap className="text-blue-600 dark:text-blue-400" />
+              },
+              {
+                id: 2,
+                degree: "Diploma in Web Development",
+                institution: "IDM Campus",
+                period: "2016 - 2018",
+                location: "Colombo, Sri Lanka",
+                description: "Focused on frontend technologies, responsive design, and web standards. Completed with Distinction.",
+                icon: <BookOpen className="text-purple-600 dark:text-purple-400" />
+              }
+            ].map((edu, index) => (
+              <div 
+                key={edu.id} 
+                className={`mb-8 flex ${index % 2 === 0 ? 'flex-row-reverse' : ''} justify-between items-center w-full transform-style-3d`}
+              >
+                <div className="order-1 w-5/12"></div>
+                <div className="z-10 flex items-center order-1 bg-blue-600 dark:bg-blue-800 shadow-xl w-8 h-8 rounded-full">
+                  <div className="mx-auto text-white">
+                    {edu.icon}
+                  </div>
+                </div>
+                <div 
+                  className={`order-1 bg-white dark:bg-gray-800 rounded-lg shadow-xl w-5/12 p-6 transform transition-all duration-500 hover:scale-105 hover:rotate-3d ${index % 2 === 0 ? 'text-right' : 'text-left'}`}
+                >
+                  <h3 className="font-bold text-lg mb-1">{edu.degree}</h3>
+                  <h4 className="text-blue-600 dark:text-blue-400 font-medium mb-2">{edu.institution}</h4>
+                  <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+                    <Calendar size={14} className="mr-1" />
+                    {edu.period}
+                    <MapPin size={14} className="ml-3 mr-1" />
+                    {edu.location}
+                  </div>
+                  <p className="text-sm leading-tight">{edu.description}</p>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -153,21 +347,30 @@ function App() {
 
   // Skills section component
   const SkillsSection = () => (
-    <section id="skills" className="py-20">
+    <section id="skills" className="py-20 relative bg-white dark:bg-gray-800">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">My Skills</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">My Skills</span>
+        </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
-            { name: 'React', level: 90 },
-            { name: 'JavaScript', level: 85 },
-            { name: 'TypeScript', level: 80 },
-            { name: 'HTML/CSS', level: 95 },
-            { name: 'Node.js', level: 75 },
-            { name: 'UI/UX Design', level: 70 },
-            { name: 'Git', level: 85 },
-            { name: 'AWS', level: 65 }
+            { name: 'React', level: 90, icon: <Cpu size={24} className="text-blue-600 dark:text-blue-400" /> },
+            { name: 'JavaScript', level: 85, icon: <Code size={24} className="text-yellow-500" /> },
+            { name: 'TypeScript', level: 80, icon: <Code size={24} className="text-blue-500" /> },
+            { name: 'HTML/CSS', level: 95, icon: <Palette size={24} className="text-pink-500" /> },
+            { name: 'Node.js', level: 75, icon: <Server size={24} className="text-green-600" /> },
+            { name: 'UI/UX Design', level: 70, icon: <Palette size={24} className="text-purple-500" /> },
+            { name: 'Git', level: 85, icon: <Github size={24} className="text-gray-800 dark:text-gray-200" /> },
+            { name: 'Three.js', level: 65, icon: <Cpu size={24} className="text-blue-700" /> }
           ].map((skill, index) => (
-            <div key={index} className="text-center">
+            <div 
+              key={index} 
+              className="text-center p-6 bg-gray-50 dark:bg-gray-900 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 transform-style-3d animate-fade-in-up"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className="flex justify-center mb-4">
+                {skill.icon}
+              </div>
               <div className="relative w-32 h-32 mx-auto mb-4">
                 <svg className="w-full h-full" viewBox="0 0 36 36">
                   <path
@@ -183,10 +386,16 @@ function App() {
                       a 15.9155 15.9155 0 0 1 0 31.831
                       a 15.9155 15.9155 0 0 1 0 -31.831"
                     fill="none"
-                    stroke="#3b82f6"
+                    stroke="url(#gradient)"
                     strokeWidth="3"
                     strokeDasharray={`${skill.level}, 100`}
                   />
+                  <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#3b82f6" />
+                      <stop offset="100%" stopColor="#8b5cf6" />
+                    </linearGradient>
+                  </defs>
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-lg font-bold">{skill.level}%</span>
@@ -200,44 +409,240 @@ function App() {
     </section>
   )
 
+  // Projects section component
+  const ProjectsSection = () => (
+    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900 relative">
+      <div className="container mx-auto px-6">
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">My Projects</span>
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            { 
+              id: 1, 
+              title: "3D E-Commerce Platform", 
+              description: "A full-featured online store with 3D product visualization and AR capabilities",
+              tags: ["React", "Three.js", "Node.js", "MongoDB"],
+              image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
+            },
+            { 
+              id: 2, 
+              title: "Interactive Task Management", 
+              description: "Productivity application with 3D drag-and-drop interface and team collaboration",
+              tags: ["React", "Framer Motion", "Firebase", "Tailwind"],
+              image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1139&q=80"
+            },
+            { 
+              id: 3, 
+              title: "3D Weather Visualization", 
+              description: "Real-time weather application with 3D globe and interactive data visualization",
+              tags: ["Vue.js", "Three.js", "API Integration", "Chart.js"],
+              image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1165&q=80"
+            },
+            { 
+              id: 4, 
+              title: "Social Media Analytics Dashboard", 
+              description: "3D dashboard for tracking social media performance and engagement metrics",
+              tags: ["Next.js", "GraphQL", "D3.js", "WebGL"],
+              image: "https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80"
+            },
+            { 
+              id: 5, 
+              title: "AR Fitness Tracker", 
+              description: "Mobile application with AR features for tracking workouts and nutrition goals",
+              tags: ["React Native", "ARCore", "Redux", "HealthKit"],
+              image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
+            },
+            { 
+              id: 6, 
+              title: "3D Portfolio Website", 
+              description: "Modern responsive portfolio with 3D animations and interactive elements",
+              tags: ["React", "Three.js", "Framer Motion", "Tailwind"],
+              image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1115&q=80"
+            }
+          ].map((project, index) => (
+            <div 
+              key={project.id} 
+              className="rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-gray-800 transition-all duration-500 hover:scale-105 hover:shadow-2xl transform-style-3d animate-fade-in-up group"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className="h-48 overflow-hidden relative">
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
+                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <h3 className="text-white text-xl font-bold">{project.title}</h3>
+                  </div>
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                <p className="mb-4 opacity-80 text-sm">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tags.map(tag => (
+                    <span key={tag} className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-xs rounded-full">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex justify-between items-center">
+                  <a href="#" className="text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 transition-transform hover:scale-105">
+                    <ExternalLink size={16} />
+                    Live Demo
+                  </a>
+                  <a href="#" className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 flex items-center gap-1 transition-transform hover:scale-105">
+                    <Github size={16} />
+                    Code
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+
+  // Certifications section component
+  const CertificationsSection = () => (
+    <section id="certifications" className="py-20 bg-white dark:bg-gray-800 relative">
+      <div className="container mx-auto px-6">
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">My Certifications</span>
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            { 
+              id: 1, 
+              title: "AWS Certified Developer", 
+              issuer: "Amazon Web Services",
+              date: "June 2023",
+              description: "Professional certification for AWS cloud development",
+              image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
+            },
+            { 
+              id: 2, 
+              title: "Google Frontend Developer", 
+              issuer: "Google",
+              date: "March 2023",
+              description: "Professional certification for frontend development",
+              image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1120&q=80"
+            },
+            { 
+              id: 3, 
+              title: "React Advanced Concepts", 
+              issuer: "Meta",
+              date: "January 2023",
+              description: "Advanced React patterns and best practices",
+              image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
+            },
+            { 
+              id: 4, 
+              title: "Three.js Journey Certification", 
+              issuer: "Bruno Simon",
+              date: "November 2022",
+              description: "3D web development with Three.js and WebGL",
+              image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80"
+            },
+            { 
+              id: 5, 
+              title: "UI/UX Design Specialization", 
+              issuer: "Coursera",
+              date: "August 2022",
+              description: "User interface and experience design principles",
+              image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w-1080&q=80"
+            },
+            { 
+              id: 6, 
+              title: "Full Stack Development", 
+              issuer: "Udacity",
+              date: "May 2022",
+              description: "Comprehensive full stack web development",
+              image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
+            }
+          ].map((cert, index) => (
+            <div 
+              key={cert.id} 
+              className="rounded-2xl overflow-hidden shadow-lg bg-gray-50 dark:bg-gray-900 transition-all duration-500 hover:scale-105 hover:shadow-2xl transform-style-3d animate-fade-in-up group"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className="h-48 overflow-hidden relative">
+                <img 
+                  src={cert.image} 
+                  alt={cert.title} 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <Award size={16} className="inline mr-1" />
+                  Certified
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2">{cert.title}</h3>
+                <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
+                  <Calendar size={14} className="mr-1" />
+                  {cert.date}
+                </div>
+                <p className="mb-4 opacity-80 text-sm">{cert.description}</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-blue-600 dark:text-blue-400 font-medium">{cert.issuer}</span>
+                  <a href="#" className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 flex items-center gap-1 text-sm transition-transform hover:scale-105">
+                    View Credential
+                    <ExternalLink size={14} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+
   // Contact section component
   const ContactSection = () => (
-    <section id="contact" className="py-20 bg-gray-100 dark:bg-gray-800">
+    <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-900 relative">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Get In Touch</h2>
-        <div className="max-w-lg mx-auto">
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Get In Touch</span>
+        </h2>
+        <div className="max-w-lg mx-auto bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl transform-style-3d animate-fade-in-up">
           <form className="space-y-6">
             <div>
-              <label htmlFor="name" className="block mb-2">Name</label>
+              <label htmlFor="name" className="block mb-2 font-medium">Name</label>
               <input 
                 type="text" 
                 id="name" 
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all transform-style-3d"
                 placeholder="Your name"
               />
             </div>
             <div>
-              <label htmlFor="email" className="block mb-2">Email</label>
+              <label htmlFor="email" className="block mb-2 font-medium">Email</label>
               <input 
                 type="email" 
                 id="email" 
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all transform-style-3d"
                 placeholder="Your email"
               />
             </div>
             <div>
-              <label htmlFor="message" className="block mb-2">Message</label>
+              <label htmlFor="message" className="block mb-2 font-medium">Message</label>
               <textarea 
                 id="message" 
                 rows="5"
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all transform-style-3d"
                 placeholder="Your message"
               ></textarea>
             </div>
             <button 
               type="submit" 
-              className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 transform-style-3d"
             >
+              <Mail size={18} />
               Send Message
             </button>
           </form>
@@ -248,21 +653,35 @@ function App() {
 
   // Footer component
   const Footer = () => (
-    <footer className="py-8 border-t border-gray-200 dark:border-gray-800">
+    <footer className="py-12 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800">
       <div className="container mx-auto px-6 text-center">
         <div className="flex justify-center space-x-6 mb-6">
-          {['github', 'twitter', 'linkedin', 'instagram'].map((social) => (
+          {[
+            { icon: <Github size={20} />, name: 'github', url: '#' },
+            { icon: <Twitter size={20} />, name: 'twitter', url: '#' },
+            { icon: <Linkedin size={20} />, name: 'linkedin', url: '#' },
+            { icon: <Instagram size={20} />, name: 'instagram', url: '#' }
+          ].map((social) => (
             <a 
-              key={social}
-              href="#" 
-              className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              key={social.name}
+              href={social.url} 
+              className="p-3 rounded-full bg-gray-100 dark:bg-gray-900 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 transform hover:scale-110 shadow-sm transform-style-3d"
+              aria-label={social.name}
             >
-              <span className="sr-only">{social}</span>
-              {social.charAt(0).toUpperCase() + social.slice(1)}
+              {social.icon}
             </a>
           ))}
         </div>
-        <p>© {new Date().getFullYear()} John Doe. All rights reserved.</p>
+        <button 
+          onClick={downloadCV}
+          className="mb-6 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2 mx-auto transform-style-3d"
+        >
+          <Download size={18} />
+          Download My CV
+        </button>
+        <p className="text-gray-600 dark:text-gray-400">
+          © {new Date().getFullYear()} Dasith Kavishalya. All rights reserved.
+        </p>
       </div>
     </footer>
   )
@@ -272,8 +691,10 @@ function App() {
       <Navigation />
       <HeroSection />
       <AboutSection />
-      <ProjectsSection />
+      <EducationSection />
       <SkillsSection />
+      <ProjectsSection />
+      <CertificationsSection />
       <ContactSection />
       <Footer />
     </div>

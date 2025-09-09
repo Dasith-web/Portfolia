@@ -1,21 +1,164 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* App.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-/* Your custom styles */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
 }
 
-/* Rest of your custom styles... */
+/* 3D Transform Styles */
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.hover\:rotate-3d:hover {
+  transform: perspective(1000px) rotateY(10deg) rotateX(5deg) scale(1.05);
+}
+
+/* 3D Floating Animations */
+@keyframes float-3d {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate3d(1, 1, 1, 0deg);
+  }
+  33% {
+    transform: translate3d(30px, -30px, 30px) rotate3d(1, 0, 0, 10deg);
+  }
+  66% {
+    transform: translate3d(-20px, 20px, 40px) rotate3d(0, 1, 0, 10deg);
+  }
+}
+
+@keyframes float-3d-reverse {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate3d(1, 1, 1, 0deg);
+  }
+  33% {
+    transform: translate3d(-30px, 30px, 30px) rotate3d(1, 0, 0, -10deg);
+  }
+  66% {
+    transform: translate3d(20px, -20px, 40px) rotate3d(0, 1, 0, -10deg);
+  }
+}
+
+.animate-float-3d {
+  animation: float-3d 15s ease-in-out infinite;
+}
+
+.animate-float-3d-reverse {
+  animation: float-3d-reverse 15s ease-in-out infinite;
+}
+
+/* Background Grid Pattern */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+@keyframes pan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 50px 50px;
+  }
+}
+
+.animate-pan {
+  animation: pan 20s linear infinite;
+}
+
+/* Enhanced Animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0) perspective(1000px) rotateX(10deg);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) perspective(1000px) rotateX(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+@keyframes fade-in-left {
+  from {
+    opacity: 0;
+    transform: translate3d(-40px, 0, 0) perspective(1000px) rotateY(10deg);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) perspective(1000px) rotateY(0);
+  }
+}
+
+.animate-fade-in-left {
+  animation: fade-in-left 0.8s ease-out forwards;
+}
+
+@keyframes fade-in-right {
+  from {
+    opacity: 0;
+    transform: translate3d(40px, 0, 0) perspective(1000px) rotateY(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) perspective(1000px) rotateY(0);
+  }
+}
+
+.animate-fade-in-right {
+  animation: fade-in-right 0.8s ease-out forwards;
+}
+
+/* Delay utilities */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+/* Slow animations for background elements */
+.animate-pulse-slow {
+  animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce 6s infinite;
+}
+
+/* Dark mode styles */
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+/* Group hover effects */
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+}
+
+.group:hover .group-hover\:translate-y-0 {
+  transform: translateY(0);
+}
+
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
