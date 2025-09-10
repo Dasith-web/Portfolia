@@ -8,6 +8,7 @@ import {
   GraduationCap, MapPin, Briefcase
 } from 'lucide-react'
 import './App.css'
+import profileImg from './assets/dasith.jpg'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false)
@@ -141,7 +142,7 @@ Website: www.dasithdev.com`], { type: 'text/plain;charset=utf-8' })
   const Navigation = () => (
     <nav className="fixed w-full z-30 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-gray-200/50 dark:border-gray-800/50 transition-all duration-300">
       <div className="container mx-auto px-6 py-3 flex justify-between items-center">
-        <a href="#" className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        <a href={profileImg} className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
           Dasith Kavishalya
         </a>
         
@@ -185,41 +186,48 @@ Website: www.dasithdev.com`], { type: 'text/plain;charset=utf-8' })
     <section id="home" className="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
       <ThreeDBackground />
       
-      <div className="container mx-auto px-6 py-20 text-center relative z-10">
-        <div className="max-w-3xl mx-auto transform transition-all duration-700 hover:scale-105">
-          <div className="mb-8 animate-float">
-            <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1 shadow-2xl transform-style-3d">
-              <img 
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" 
-                alt="Dasith Kavishalya" 
-                className="w-full h-full object-cover rounded-full border-4 border-white dark:border-gray-900"
-              />
-            </div>
-          </div>
-          
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up">
-            Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Dasith Kavishalya</span>
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 opacity-80 animate-fade-in-up delay-100">
-            A <span className="font-semibold">Frontend Developer</span> & <span className="font-semibold">3D Enthusiast</span>
-          </p>
-          <div className="flex justify-center space-x-4 animate-fade-in-up delay-200">
-            <button 
-              onClick={() => scrollToSection('projects')}
-              className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2"
-            >
-              <Code size={18} />
-              View My Work
-            </button>
-            <button 
-              onClick={downloadCV}
-              className="px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 shadow-lg hover:shadow-xl"
-            >
-              <FileText size={18} />
-              Download CV
-            </button>
-          </div>
-        </div>
+<div className="container mx-auto px-6 py-20 text-center relative z-10">
+  <div className="max-w-3xl mx-auto transform transition-all duration-700 hover:scale-105">
+    <div className="mb-8 animate-float">
+      <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1 shadow-2xl transform-style-3d">
+        <img 
+          src={profileImg}
+          alt="Dasith Kavishalya" 
+          className="w-full h-full object-cover rounded-full border-4 border-white dark:border-gray-900"
+        />
+      </div>
+    </div>
+    
+    <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up">
+      Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Dasith Kavishalya</span>
+    </h1>
+    <p className="text-xl md:text-2xl mb-8 opacity-80 animate-fade-in-up delay-100">
+      An aspiring <span className="font-semibold">Full Stack Developer</span> passionate about 
+      <span className="font-semibold"> Backend</span>, 
+      <span className="font-semibold"> Frontend</span>, 
+      <span className="font-semibold"> DevOps</span>, 
+      <span className="font-semibold"> Data Analysis</span>, and 
+      <span className="font-semibold"> Cloud Computing</span>.
+    </p>
+    <div className="flex justify-center space-x-4 animate-fade-in-up delay-200">
+      <button 
+        onClick={() => scrollToSection('projects')}
+        className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2"
+      >
+        <Code size={18} />
+        View My Work
+      </button>
+      <button 
+        onClick={downloadCV}
+        className="px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 shadow-lg hover:shadow-xl"
+      >
+        <FileText size={18} />
+        Download CV
+      </button>
+    </div>
+  </div>
+
+
         
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
           <button 
@@ -245,7 +253,7 @@ Website: www.dasithdev.com`], { type: 'text/plain;charset=utf-8' })
           <div className="w-full md:w-1/3 animate-fade-in-left transform-style-3d">
             <div className="rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-105 hover:rotate-3d">
               <img 
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" 
+                src={profileImg} 
                 alt="Dasith Kavishalya" 
                 className="w-full h-auto object-cover"
               />
@@ -297,20 +305,20 @@ Website: www.dasithdev.com`], { type: 'text/plain;charset=utf-8' })
             {[
               {
                 id: 1,
-                degree: "BSc (Hons) in Software Engineering",
-                institution: "University of Westminster",
-                period: "2018 - 2022",
-                location: "London, UK",
-                description: "Specialized in web development, software architecture, and user experience design. Graduated with First Class Honors.",
+                degree: "BSc (Hons) in Information Technology",
+                institution: "SLIIT",
+                period: "2022 - 2026",
+                location: "Sri Lanka",
+                description: "Specialized in web development, software architecture, and user experience design. Undergraduate",
                 icon: <GraduationCap className="text-blue-600 dark:text-blue-400" />
               },
               {
                 id: 2,
-                degree: "Diploma in Web Development",
-                institution: "IDM Campus",
-                period: "2016 - 2018",
-                location: "Colombo, Sri Lanka",
-                description: "Focused on frontend technologies, responsive design, and web standards. Completed with Distinction.",
+                degree: "Technology stream",
+                institution: "C.W.W.Kannangara Central College",
+                period: "2019 - 2021",
+                location: "Mathugama, Sri Lanka",
+                description: "The Technology stream builds core skills in programming, software development, and modern IT practices.",
                 icon: <BookOpen className="text-purple-600 dark:text-purple-400" />
               }
             ].map((edu, index) => (
