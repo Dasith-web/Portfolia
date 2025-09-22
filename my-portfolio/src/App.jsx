@@ -67,46 +67,26 @@ function App() {
     }
   }
 
-  const downloadCV = () => {
-    const blob = new Blob([`Dasith Kavishalya - Frontend Developer
-
-Professional Summary:
-Experienced Frontend Developer with 5+ years of expertise in React, JavaScript, and modern web technologies. Passionate about creating beautiful, responsive, and user-friendly web applications.
-
-Education:
-BSc (Hons) in Software Engineering - University of Westminster (2018-2022)
-Diploma in Web Development - IDM Campus (2016-2018)
-
-Skills:
-- React, JavaScript, TypeScript
-- HTML5, CSS3, Tailwind CSS
-- Next.js, Node.js, Express
-- Git, GitHub, CI/CD
-- UI/UX Design, Responsive Design
-- Three.js, WebGL, 3D Graphics
-
-Experience:
-Senior Frontend Developer at TechCorp (2020-Present)
-Frontend Developer at WebSolutions (2018-2020)
-
-Certifications:
-- AWS Certified Developer Associate
-- Google Professional Frontend Developer
-- React Advanced Certification
-- Three.js Journey Certification
-
-Projects:
-E-Commerce Platform - Full-featured online store
-Task Management App - Productivity application
-Weather Dashboard - Real-time weather application
-
-Contact:
-Email: dasith@example.com
-Phone: +1 (555) 123-4567
-Website: www.dasithdev.com`], { type: 'text/plain;charset=utf-8' })
+const downloadCV = () => {
+  try {
+    // Direct public folder path (Vite serves public folder from root)
+    const fileUrl = `${window.location.origin}/Dasith_Kavishalya_CV.pdf`;
     
-    saveAs(blob, 'Dasith_Kavishalya_CV.pdf')
+    // Using file-saver
+    saveAs(fileUrl, 'Dasith_Kavishalya_CV.pdf');
+    
+  } catch (error) {
+    console.error('Error downloading CV:', error);
+    
+    // Simple anchor tag fallback
+    const link = document.createElement('a');
+    link.href = '/Dasith_Kavishalya_CV.pdf';
+    link.download = 'Dasith_Kavishalya_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
+}
 
   // Loading screen component
   if (isLoading) {
