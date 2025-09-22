@@ -243,7 +243,7 @@ Website: www.dasithdev.com`], { type: 'text/plain;charset=utf-8' })
   )
 
   // About section component
-  const AboutSection = () => (
+ const AboutSection = () => (
     <section id="about" className="py-20 relative">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
@@ -261,15 +261,15 @@ Website: www.dasithdev.com`], { type: 'text/plain;charset=utf-8' })
           </div>
           <div className="w-full md:w-2/3 animate-fade-in-right">
             <p className="text-lg mb-6 leading-relaxed">
-              I'm a passionate <span className="font-semibold text-blue-600 dark:text-blue-400">frontend developer</span> with 5+ years of experience creating beautiful, functional websites and applications. 
-              I specialize in React, Vue.js, and modern JavaScript frameworks, with a keen eye for UI/UX design.
+              I'm a passionate <span className="font-semibold text-blue-600 dark:text-blue-400">3rd year IT undergraduate</span> with strong foundation in full-stack development and emerging technologies. 
+              Currently expanding my expertise in MERN stack, mobile development, and data analytics through academic projects and self-learning.
             </p>
             <p className="text-lg mb-6 leading-relaxed">
-              My approach combines <span className="font-semibold text-purple-600 dark:text-purple-400">aesthetic design</span> with technical excellence to create digital experiences that users love. 
-              I'm constantly learning and adapting to new technologies and methodologies to stay at the forefront of web development.
+              My technical journey combines <span className="font-semibold text-purple-600 dark:text-purple-400">academic knowledge</span> with practical application, focusing on creating efficient and scalable solutions. 
+              I'm enthusiastic about exploring new technologies and building innovative projects that solve real-world problems.
             </p>
             <div className="flex flex-wrap gap-3 mb-6">
-              {['React', 'JavaScript', 'TypeScript', 'Next.js', 'Tailwind CSS', 'UI/UX Design', 'Node.js', 'GraphQL', 'Three.js', 'WebGL'].map((skill) => (
+              {['MERN Stack', 'Spring Boot', 'React Native', 'Flutter', 'Data Analytics', 'JavaScript', 'TypeScript', 'MongoDB', 'Express.js', 'Node.js', 'Python', 'Java'].map((skill) => (
                 <div key={skill} className="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center gap-2 transition-all hover:scale-105 transform-style-3d">
                   <Zap size={14} className="text-blue-600 dark:text-blue-400" />
                   <span>{skill}</span>
@@ -287,7 +287,8 @@ Website: www.dasithdev.com`], { type: 'text/plain;charset=utf-8' })
         </div>
       </div>
     </section>
-  )
+);
+  
 
   // Education section component
   const EducationSection = () => (
