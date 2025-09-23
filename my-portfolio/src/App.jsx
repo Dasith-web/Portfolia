@@ -10,6 +10,8 @@ import {
 import './App.css'
 import profileImg from './assets/dasith.jpg'
 
+
+
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
@@ -400,101 +402,122 @@ const downloadCV = () => {
 
   // Projects section component
   const ProjectsSection = () => (
-    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900 relative">
-      <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">My Projects</span>
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            { 
-              id: 1, 
-              title: "3D E-Commerce Platform", 
-              description: "A full-featured online store with 3D product visualization and AR capabilities",
-              tags: ["React", "Three.js", "Node.js", "MongoDB"],
-              image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
-            },
-            { 
-              id: 2, 
-              title: "Interactive Task Management", 
-              description: "Productivity application with 3D drag-and-drop interface and team collaboration",
-              tags: ["React", "Framer Motion", "Firebase", "Tailwind"],
-              image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1139&q=80"
-            },
-            { 
-              id: 3, 
-              title: "3D Weather Visualization", 
-              description: "Real-time weather application with 3D globe and interactive data visualization",
-              tags: ["Vue.js", "Three.js", "API Integration", "Chart.js"],
-              image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1165&q=80"
-            },
-            { 
-              id: 4, 
-              title: "Social Media Analytics Dashboard", 
-              description: "3D dashboard for tracking social media performance and engagement metrics",
-              tags: ["Next.js", "GraphQL", "D3.js", "WebGL"],
-              image: "https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80"
-            },
-            { 
-              id: 5, 
-              title: "AR Fitness Tracker", 
-              description: "Mobile application with AR features for tracking workouts and nutrition goals",
-              tags: ["React Native", "ARCore", "Redux", "HealthKit"],
-              image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
-            },
-            { 
-              id: 6, 
-              title: "3D Portfolio Website", 
-              description: "Modern responsive portfolio with 3D animations and interactive elements",
-              tags: ["React", "Three.js", "Framer Motion", "Tailwind"],
-              image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1115&q=80"
-            }
-          ].map((project, index) => (
-            <div 
-              key={project.id} 
-              className="rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-gray-800 transition-all duration-500 hover:scale-105 hover:shadow-2xl transform-style-3d animate-fade-in-up group"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="h-48 overflow-hidden relative">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
-                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <h3 className="text-white text-xl font-bold">{project.title}</h3>
-                  </div>
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="mb-4 opacity-80 text-sm">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-xs rounded-full">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex justify-between items-center">
-                  <a href="#" className="text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 transition-transform hover:scale-105">
-                    <ExternalLink size={16} />
-                    Live Demo
-                  </a>
-                  <a href="#" className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 flex items-center gap-1 transition-transform hover:scale-105">
-                    <Github size={16} />
-                    Code
-                  </a>
+  <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900 relative">
+    <div className="container mx-auto px-6">
+      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+        <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">My Projects</span>
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {[
+          { 
+            id: 1, 
+            title: "Gym Management System", 
+            description: "A comprehensive gym management solution built with MERN stack for managing memberships, workouts, payments, and trainer schedules",
+            tags: ["MongoDB", "Express.js", "React", "Node.js", "JWT", "Stripe"],
+            image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+            liveDemo: "https://github.com/Dasith-web/Gym-Management-System", // Add your live demo link
+            github: "https://github.com/Dasith-web/Gym-Management-System" // Add your GitHub link
+          },
+          { 
+            id: 2, 
+            title: "Japan Panthiya", 
+            description: "E-learning platform similar to Coursera where teachers can upload videos, create quizzes, and manage courses with Spring Boot backend",
+            tags: ["Spring Boot", "Java", "MySQL", "React", "JWT", "AWS S3"],
+            image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80",
+            liveDemo: "#", // Add your live demo link
+            github: "https://github.com/yourusername/japan-panthiya"
+          },
+          { 
+            id: 3, 
+            title: "Cook Hub", 
+            description: "Food recipe application with user-generated content, recipe sharing, and meal planning features built with Spring Boot",
+            tags: ["Spring Boot", "Java", "PostgreSQL", "Thymeleaf", "Bootstrap"],
+            image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80",
+            liveDemo: "#", // Add your live demo link
+            github: "https://github.com/yourusername/cook-hub"
+          },
+          { 
+            id: 4, 
+            title: "Travel Planning System", 
+            description: "Complete travel planning platform with itinerary management, booking system, and destination recommendations using MERN stack",
+            tags: ["MongoDB", "Express.js", "React", "Node.js", "REST API", "Map Integration"],
+            image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=1035&q=80",
+            liveDemo: "#", // Add your live demo link
+            github: "https://github.com/yourusername/travel-planning-system"
+          },
+          { 
+            id: 5, 
+            title: "Book Store", 
+            description: "E-commerce platform for books with user authentication, shopping cart, order management, and payment integration",
+            tags: ["MongoDB", "Express.js", "React", "Node.js", "Redux", "PayPal API"],
+            image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80",
+            liveDemo: "#", // Add your live demo link
+            github: "https://github.com/yourusername/book-store"
+          },
+          { 
+            id: 6, 
+            title: "Presentation Scheduling App", 
+            description: "Mobile application for scheduling and managing presentations with calendar integration and notification system",
+            tags: ["React Native", "Firebase", "Redux", "Node.js", "Push Notifications"],
+            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+            liveDemo: "#", // Add your live demo link (or app store link)
+            github: "https://github.com/yourusername/presentation-scheduling-app"
+          }
+        ].map((project, index) => (
+          <div 
+            key={project.id} 
+            className="rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-gray-800 transition-all duration-500 hover:scale-105 hover:shadow-2xl transform-style-3d animate-fade-in-up group"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            <div className="h-48 overflow-hidden relative">
+              <img 
+                src={project.image} 
+                alt={project.title} 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
+                <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="text-white text-xl font-bold">{project.title}</h3>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+            <div className="p-6">
+              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{project.title}</h3>
+              <p className="mb-4 opacity-80 text-sm text-gray-600 dark:text-gray-300">{project.description}</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.tags.map(tag => (
+                  <span key={tag} className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="flex justify-between items-center">
+                <a 
+                  href={project.liveDemo} 
+                  className="text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 transition-transform hover:scale-105"
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink size={16} />
+                  {project.title.includes("Mobile App") ? "View App" : "Live Demo"}
+                </a>
+                <a 
+                  href={project.github} 
+                  className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 flex items-center gap-1 transition-transform hover:scale-105"
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <Github size={16} />
+                  Code
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-    </section>
-  )
-
+    </div>
+  </section>
+);
   // Certifications section component
   const CertificationsSection = () => (
     <section id="certifications" className="py-20 bg-white dark:bg-gray-800 relative">
