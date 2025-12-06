@@ -424,8 +424,8 @@ const downloadCV = () => {
             description: "E-learning platform similar to Coursera where teachers can upload videos, create quizzes, and manage courses with Spring Boot backend",
             tags: ["Spring Boot", "Java", "MySQL", "React", "JWT", "AWS S3"],
             image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80",
-            liveDemo: "#", // Add your live demo link
-            github: "https://github.com/yourusername/japan-panthiya"
+            liveDemo: "https://github.com/Dasith-web/Japan_Panthiya", // Add your live demo link
+            github: "https://github.com/Dasith-web/Japan_Panthiya"
           },
           { 
             id: 3, 
@@ -433,8 +433,8 @@ const downloadCV = () => {
             description: "Food recipe application with user-generated content, recipe sharing, and meal planning features built with Spring Boot",
             tags: ["Spring Boot", "Java", "PostgreSQL", "Thymeleaf", "Bootstrap"],
             image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80",
-            liveDemo: "#", // Add your live demo link
-            github: "https://github.com/yourusername/cook-hub"
+            liveDemo: "https://github.com/Dasith-web/Cook_Hub-FoodApp", // Add your live demo link
+            github: "https://github.com/Dasith-web/Cook_Hub-FoodApp"
           },
           { 
             id: 4, 
@@ -442,8 +442,8 @@ const downloadCV = () => {
             description: "Complete travel planning platform with itinerary management, booking system, and destination recommendations using MERN stack",
             tags: ["MongoDB", "Express.js", "React", "Node.js", "REST API", "Map Integration"],
             image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=1035&q=80",
-            liveDemo: "#", // Add your live demo link
-            github: "https://github.com/yourusername/travel-planning-system"
+            liveDemo: "https://github.com/Dasith-web/Travel-Planning-System-", // Add your live demo link
+            github: "https://github.com/Dasith-web/Travel-Planning-System-"
           },
           { 
             id: 5, 
@@ -451,8 +451,8 @@ const downloadCV = () => {
             description: "E-commerce platform for books with user authentication, shopping cart, order management, and payment integration",
             tags: ["MongoDB", "Express.js", "React", "Node.js", "Redux", "PayPal API"],
             image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80",
-            liveDemo: "#", // Add your live demo link
-            github: "https://github.com/yourusername/book-store"
+            liveDemo: "https://github.com/Dasith-web/Book-Store", // Add your live demo link
+            github: "https://github.com/Dasith-web/Book-Store"
           },
           { 
             id: 6, 
@@ -460,8 +460,8 @@ const downloadCV = () => {
             description: "Mobile application for scheduling and managing presentations with calendar integration and notification system",
             tags: ["React Native", "Firebase", "Redux", "Node.js", "Push Notifications"],
             image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
-            liveDemo: "#", // Add your live demo link (or app store link)
-            github: "https://github.com/yourusername/presentation-scheduling-app"
+            liveDemo: "https://github.com/Dasith-web/Presentation-Scheduling-MobileApp", // Add your live demo link (or app store link)
+            github: "https://github.com/Dasith-web/Presentation-Scheduling-MobileApp"
           }
         ].map((project, index) => (
           <div 
@@ -529,11 +529,11 @@ const downloadCV = () => {
           {[
             { 
               id: 1, 
-              title: "AWS Certified Developer", 
-              issuer: "Amazon Web Services",
-              date: "June 2023",
-              description: "Professional certification for AWS cloud development",
-              image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
+              title: " Introduction to Software Engineering", 
+              issuer: "IBM",
+              date: "Aug 2025",
+              description: "Professional certification for Introduction to Software Engineering",
+              image: "https://coursera.org/share/8cbf8f48aca8cbd57b9489ec9df0759e"
             },
             { 
               id: 2, 
