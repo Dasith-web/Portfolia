@@ -12,6 +12,7 @@ import profileImg from './assets/dasith.jpg'
 
 
 
+
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
@@ -69,26 +70,31 @@ function App() {
     }
   }
 
-const downloadCV = () => {
+const downloadCV = async () => {
+  const url = './public/Dasith_Kavishalya_CV.pdf'; // public/Dasith_Kavishalya_CV.pdf
+
   try {
-    // Direct public folder path (Vite serves public folder from root)
-    const fileUrl = `${window.location.origin}/Dasith_Kavishalya_CV.pdf`;
-    
-    // Using file-saver
-    saveAs(fileUrl, 'Dasith_Kavishalya_CV.pdf');
-    
-  } catch (error) {
-    console.error('Error downloading CV:', error);
-    
-    // Simple anchor tag fallback
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Failed to fetch CV: ${res.status} ${res.statusText}`);
+
+    const blob = await res.blob();
+    saveAs(blob, 'Dasith_Kavishalya_CV.pdf'); // file-saver
+  } catch (err) {
+    console.error('Error downloading CV:', err);
+
+    // Fallback: create an anchor to trigger native download / open in new tab
     const link = document.createElement('a');
-    link.href = '/Dasith_Kavishalya_CV.pdf';
-    link.download = 'Dasith_Kavishalya_CV.pdf';
+    link.href = url;
+    link.setAttribute('download', 'Dasith_Kavishalya_CV.pdf');
     document.body.appendChild(link);
     link.click();
-    document.body.removeChild(link);
+    link.remove();
+
+    // Last-resort: open the PDF in a new tab so the user can manually save it
+    setTimeout(() => window.open(url, '_blank', 'noopener,noreferrer'), 150);
   }
 }
+
 
   // Loading screen component
   if (isLoading) {
