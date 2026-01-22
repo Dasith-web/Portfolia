@@ -9,6 +9,12 @@ import {
 } from 'lucide-react'
 import './App.css'
 import profileImg from './assets/dasith.jpg'
+import se from "../src/assets/images/software-engineering.png";
+import da from "../src/assets/images/data-analytics-foundations.png";
+import qa from "../src/assets/images/software-qa.png";
+import cs from "../src/assets/images/cloud-computing.png";
+import as from "../src/assets/images/applied-statistics.png";
+
 
 
 
@@ -71,7 +77,7 @@ function App() {
   }
 
 const downloadCV = async () => {
-  const url = './public/Dasith_Kavishalya_CV.pdf'; // public/Dasith_Kavishalya_CV.pdf
+  const url = './public/Dasith Kavishalya CV (1).pdf'; // public/Dasith_Kavishalya_CV.pdf
 
   try {
     const res = await fetch(url);
@@ -533,54 +539,48 @@ const downloadCV = async () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
+            
             { 
-              id: 1, 
-              title: " Introduction to Software Engineering", 
-              issuer: "IBM",
-              date: "Aug 2025",
-              description: "Professional certification for Introduction to Software Engineering",
-              image: "https://coursera.org/share/8cbf8f48aca8cbd57b9489ec9df0759e"
-            },
+    id: 1, 
+    title: "Introduction to Software Engineering", 
+    issuer: "IBM", 
+    date: "Aug 20, 2025", 
+    description: "Foundational knowledge of the software development lifecycle (SDLC), Agile methodologies, and software engineering tools.",
+    image: se, // Replace with your file path
+  },
             { 
-              id: 2, 
-              title: "Google Frontend Developer", 
-              issuer: "Google",
-              date: "March 2023",
-              description: "Professional certification for frontend development",
-              image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1120&q=80"
-            },
-            { 
-              id: 3, 
-              title: "React Advanced Concepts", 
-              issuer: "Meta",
-              date: "January 2023",
-              description: "Advanced React patterns and best practices",
-              image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
-            },
-            { 
-              id: 4, 
-              title: "Three.js Journey Certification", 
-              issuer: "Bruno Simon",
-              date: "November 2022",
-              description: "3D web development with Three.js and WebGL",
-              image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80"
-            },
-            { 
-              id: 5, 
-              title: "UI/UX Design Specialization", 
-              issuer: "Coursera",
-              date: "August 2022",
-              description: "User interface and experience design principles",
-              image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w-1080&q=80"
-            },
-            { 
-              id: 6, 
-              title: "Full Stack Development", 
-              issuer: "Udacity",
-              date: "May 2022",
-              description: "Comprehensive full stack web development",
-              image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
-            }
+    id: 2, 
+    title: "Introduction to Cloud Computing", 
+    issuer: "IBM", 
+    date: "Sep 9, 2025", 
+    description: "Understanding of cloud service models (IaaS, PaaS, SaaS), deployment strategies, and core cloud infrastructure concepts.",
+    image: cs,// Replace with your file path
+  },
+           { 
+    id: 3, 
+    title: "Introduction to Software Quality Assurance", 
+    issuer: "Board Infinity", 
+    date: "Jan 20, 2026", 
+    description: "Comprehensive training in software testing, defect management, and ensuring high-quality software delivery.",
+    image: qa, // Replace with your file path
+  },
+{ 
+    id: 4, 
+    title: "Data Analytics Foundations", 
+    issuer: "DeepLearning.AI", 
+    date: "Oct 9, 2025", 
+    description: "Core principles of data analysis, including data collection, cleaning, and basic analytical techniques.",
+    image: da, // Replace with your file path
+  },
+  { 
+    id: 5, 
+    title: "Applied Statistics for Data Analytics", 
+    issuer: "DeepLearning.AI", 
+    date: "Nov 1, 2025", 
+    description: "Application of statistical methods to analyze data sets and derive meaningful insights for business decisions.",
+    image: as, // Replace with your file path
+  }
+          
           ].map((cert, index) => (
             <div 
               key={cert.id} 
